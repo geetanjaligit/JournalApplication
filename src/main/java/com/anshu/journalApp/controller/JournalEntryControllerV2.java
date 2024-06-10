@@ -60,8 +60,8 @@ public class JournalEntryControllerV2 {
         
         JournalEntry oldEntry = service.getEntryById(myid).orElse(null);
         if(oldEntry!=null){
-           oldEntry.setTitle(entry.getTitle()!=null && entry.getTitle().equals("")? entry.getTitle(): oldEntry.getTitle());
-           oldEntry.setContent(entry.getContent()!=null && entry.getContent().equals("")? entry.getContent(): oldEntry.getContent());
+           oldEntry.setTitle(entry.getTitle()!=null && !entry.getTitle().equals("")? entry.getTitle(): oldEntry.getTitle());
+           oldEntry.setContent(entry.getContent()!=null && !entry.getContent().equals("")? entry.getContent(): oldEntry.getContent());
         }
         service.saveEntry(oldEntry);
         return oldEntry;
