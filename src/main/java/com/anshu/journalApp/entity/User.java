@@ -13,9 +13,8 @@ import com.mongodb.lang.NonNull;
 
 import lombok.Data;
 
+
 @Document(collection="users")
-
-
 @Data
 public class User {
     @Id
@@ -30,8 +29,5 @@ public class User {
 
     @DBRef
     private List<JournalEntry> journalEntries=new ArrayList<>();
-
-   
-
 
 }
