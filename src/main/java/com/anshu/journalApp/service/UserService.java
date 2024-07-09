@@ -20,16 +20,20 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<User> getAllEntries() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    public Optional<User> getEntryById(ObjectId id) {
-        return userRepository.findById(id);
+    public Optional<User> getEntryById(ObjectId Id) {
+        return userRepository.findById(Id);
     }
 
-    public void deleteEntryById(ObjectId id) {
-        userRepository.deleteById(id);
+    public void deleteEntryById(ObjectId username) {
+        userRepository.deleteById(username);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 }
