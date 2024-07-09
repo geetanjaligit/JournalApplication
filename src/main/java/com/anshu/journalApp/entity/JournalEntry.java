@@ -11,6 +11,7 @@ import com.mongodb.lang.NonNull;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Document(collection="Journal_entries")
@@ -18,6 +19,7 @@ import lombok.Setter;
 //between the JournalEntry class and the MongoDB collection.
 
 @Data
+@NoArgsConstructor
 public class JournalEntry {
 
     @Id
