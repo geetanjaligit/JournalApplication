@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anshu.journalApp.entity.JournalEntry;
+import com.anshu.journalApp.entity.User;
 import com.anshu.journalApp.service.JournalEntryService;
+import com.anshu.journalApp.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList; // Import the ArrayList class
@@ -29,11 +31,17 @@ public class JournalEntryControllerV2 {
     @Autowired
     private JournalEntryService service;
 
+    @Autowired
+    private UserService userService;
+
 //ResponseEntity<?>:- This indicates that the return type can be any type of object.it denotes a wildcard.
-    @GetMapping
-    public ResponseEntity<?> getAll() {
-           
-         List<JournalEntry> all=service.getAllEntries();
+    
+    @GetMapping("{username}")
+    public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String username) {
+        
+        User user=userService.findByUsername(username);
+
+         List<JournalEntry> all=user.getJournalEntries();
          if(all!=null && !all.isEmpty()){
              return new ResponseEntity<>(all,HttpStatus.OK);
          }
@@ -41,11 +49,10 @@ public class JournalEntryControllerV2 {
 
     }
    
-    @PostMapping
-    public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry entry) {
+    @PostMapping("{username}")
+    public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry entry,@PathVariable String username) {
     try{
-        entry.setDate(LocalDateTime.now());
-        service.saveEntry(entry);
+        service.saveEntry(entry,username);
         return new ResponseEntity<>(entry, HttpStatus.CREATED);
     }
     catch(Exception e){
@@ -63,14 +70,14 @@ public class JournalEntryControllerV2 {
          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("id/{myid}")
-    public ResponseEntity<JournalEntry> deleteJournalEntryById(@PathVariable ObjectId myid) {
-        service.deleteEntryById(myid);
+    @DeleteMapping("id/{username}/{myid}")
+    public ResponseEntity<JournalEntry> deleteJournalEntryById(@PathVariable ObjectId myid,@PathVariable String username) {
+        service.deleteEntryById(myid,username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("id/{myid}")
-    public ResponseEntity<JournalEntry> updateEntry(@PathVariable ObjectId myid, @RequestBody JournalEntry entry) {
+    @PutMapping("id/{username}/{myid}")
+    public ResponseEntity<JournalEntry> updateEntry(@PathVariable ObjectId myid, @RequestBody JournalEntry entry,@PathVariable String username) {
         
         JournalEntry oldEntry = service.getEntryById(myid).orElse(entry);
         if(oldEntry!=null){
