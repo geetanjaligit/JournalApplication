@@ -26,8 +26,10 @@ public class User {
     private String username;
     @NonNull
     private String password;
-
-    @DBRef
+    @DBRef//This annotation tells Spring Data MongoDB to store the reference to the JournalEntry document in the user document.
     private List<JournalEntry> journalEntries=new ArrayList<>();
+
+    //roles- what are the things for which user is authorized to do
+    private List<String> roles;
 
 }
