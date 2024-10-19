@@ -20,7 +20,7 @@ import com.anshu.journalApp.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList; // Import the ArrayList class
-import java.util.HashMap; // Import the HashMap class
+import java.util.HashMap; // `Import the HashMap class
 import java.util.List; // Import the List class
 import java.util.Optional;
 

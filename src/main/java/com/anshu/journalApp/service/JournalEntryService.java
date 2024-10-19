@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+// import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// import org.springframework.transaction.annotation.Transactional;
 
 import com.anshu.journalApp.entity.JournalEntry;
 import com.anshu.journalApp.entity.User;
@@ -31,7 +31,6 @@ public class JournalEntryService {
         entry.setDate(LocalDateTime.now());
         JournalEntry saved=repository.save(entry);
         user.getJournalEntries().add(saved);
-        user.setUsername(username);
         userService.saveEntry(user);
     } catch(Exception e){
         System.out.println(e);
