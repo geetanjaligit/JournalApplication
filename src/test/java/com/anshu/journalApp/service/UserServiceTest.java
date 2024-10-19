@@ -12,12 +12,12 @@ import com.anshu.journalApp.repository.UserRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Disabled;
 
+//use of JUnit framework for testing
 
-@SpringBootTest//this annontation signify that start the application context as running the code so that it can inject depeendency
+@SpringBootTest//this annontation signify that start the application context as running the code so that it can inject dependency
 public class UserServiceTest {
 
     //it will consist all the test cases for the UserService class
